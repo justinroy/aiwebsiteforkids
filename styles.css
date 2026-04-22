@@ -26,6 +26,11 @@
   --space-5: 2.6rem;
   --space-6: 4rem;
   --nav-height: 72px;
+  --shell-gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-y: clamp(4.5rem, 8vw, 7rem);
+  --room-inset: clamp(1rem, 2.4vw, 1.75rem);
+  --content-gap: clamp(1.2rem, 2.5vw, 2rem);
+  --card-padding: clamp(1.45rem, 3vw, 2.2rem);
 }
 
 *,
@@ -84,7 +89,7 @@ button {
 }
 
 .shell {
-  width: min(1120px, calc(100% - 2rem));
+  width: min(1180px, calc(100% - var(--shell-gutter) * 2));
   margin: 0 auto;
 }
 
@@ -172,7 +177,7 @@ button {
 }
 
 .section {
-  padding: clamp(3.4rem, 6vw, 6rem) 0;
+  padding: var(--section-y) 0;
   scroll-margin-top: calc(var(--nav-height) + 18px);
 }
 
@@ -180,7 +185,7 @@ button {
   min-height: calc(100vh - var(--nav-height));
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 2rem;
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: center;
 }
 
@@ -427,14 +432,13 @@ li {
 
 .room {
   position: relative;
+  padding-inline: var(--room-inset);
 }
 
 .room::before {
   content: "";
   position: absolute;
-  inset: 1.2rem 0 auto;
-  width: 100%;
-  height: calc(100% - 2.4rem);
+  inset: 0.85rem var(--room-inset);
   border-radius: 38px;
   z-index: -1;
 }
@@ -450,7 +454,7 @@ li {
 
 .section-heading {
   max-width: 44rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
 .card {
@@ -458,7 +462,7 @@ li {
   border: 1px solid rgba(21, 48, 77, 0.08);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  padding: clamp(1.2rem, 3vw, 1.8rem);
+  padding: var(--card-padding);
 }
 
 .two-column,
@@ -470,7 +474,7 @@ li {
 .quiz-grid,
 .footer-grid {
   display: grid;
-  gap: 1.2rem;
+  gap: var(--content-gap);
 }
 
 .two-column,
@@ -565,7 +569,7 @@ li {
 }
 
 .scene {
-  min-height: 420px;
+  min-height: 460px;
   position: relative;
   overflow: hidden;
   background:
@@ -632,7 +636,7 @@ li {
 }
 
 .sorter {
-  margin-top: 1.2rem;
+  margin-top: 1.6rem;
 }
 
 .sort-task {
@@ -744,7 +748,7 @@ li {
 }
 
 .site-footer {
-  padding: 2rem 0 3rem;
+  padding: 3rem 0 4rem;
 }
 
 .footer-grid {
@@ -832,11 +836,19 @@ li {
   .hero-visual {
     min-height: 390px;
   }
+
+  .section {
+    padding: clamp(3.5rem, 7vw, 4.75rem) 0;
+  }
+
+  .room {
+    padding-inline: clamp(0.45rem, 2vw, 0.9rem);
+  }
 }
 
 @media (max-width: 640px) {
   .shell {
-    width: min(100% - 1rem, 1120px);
+    width: min(100% - 1rem, 1180px);
   }
 
   .hero-visual {
