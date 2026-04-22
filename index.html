@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet AI! | A Kid-Friendly Guide to Artificial Intelligence</title>
+  <meta name="description" content="Meet AI! is a playful, kid-friendly website that teaches children what AI is, where they see it, how it can make mistakes, and how to use it safely.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="progress-wrap" aria-hidden="true">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary">
+      <a class="brand" href="#hero">
+        <span class="brand-badge">AI</span>
+        <span>Meet AI!</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+        Menu
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#what-is-ai">What is AI?</a>
+        <a href="#pattern-lab">Pattern Lab</a>
+        <a href="#everyday-ai">Everyday AI</a>
+        <a href="#sort-game">AI vs Humans</a>
+        <a href="#mistakes">Mistakes</a>
+        <a href="#safety">Safety</a>
+        <a href="#prompt-lab">Prompt Lab</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section shell reveal" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Welcome to the cartoon science lab</p>
+        <h1>Meet AI!</h1>
+        <p class="hero-text">Explore what AI is, what it can do, where it can go wrong, and how to use it safely.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#what-is-ai">Start Exploring</a>
+          <a class="button button-secondary" href="#quiz">Jump to Quiz</a>
+        </div>
+        <ul class="hero-highlights" aria-label="Highlights">
+          <li>Hands-on mini games</li>
+          <li>Myth-busting facts</li>
+          <li>Safety rules to remember</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-label="Friendly robot helper in a science lab" role="img">
+        <div class="orbiter orbiter-one"></div>
+        <div class="orbiter orbiter-two"></div>
+        <div class="mascot">
+          <div class="mascot-antenna"></div>
+          <div class="mascot-head">
+            <span class="eye"></span>
+            <span class="eye"></span>
+            <span class="smile"></span>
+          </div>
+          <div class="mascot-body">
+            <span class="badge">Hi! I’m Byte.</span>
+          </div>
+        </div>
+        <div class="lab-card bubble one">Patterns help AI learn.</div>
+        <div class="lab-card bubble two">People still guide it.</div>
+        <div class="lab-card bubble three">Always check important answers.</div>
+      </div>
+    </section>
+
+    <section class="section room room-blue shell reveal" id="what-is-ai">
+      <div class="section-heading">
+        <p class="eyebrow">Room 1</p>
+        <h2>What is AI?</h2>
+        <p>AI is a tool made by people. It studies lots of examples so it can notice patterns and make helpful guesses.</p>
+      </div>
+      <div class="two-column">
+        <article class="card story-card">
+          <h3>Think of it like this</h3>
+          <p>If an AI sees many pictures of cats, it can learn patterns like pointy ears, whiskers, and tails. Then it can guess whether a new picture might be a cat.</p>
+          <p>That does not mean the AI understands the way a person does. It means it is good at spotting patterns it has seen before.</p>
+        </article>
+        <article class="card flip-card-wrapper">
+          <h3>Myth Buster Flip Card</h3>
+          <button class="flip-card" id="flipCard" aria-pressed="false" aria-label="Flip myth buster card">
+            <span class="flip-face flip-front">
+              <span class="flip-label">Myth</span>
+              <strong>AI is magic.</strong>
+              <span>Tap or press Enter to flip.</span>
+            </span>
+            <span class="flip-face flip-back">
+              <span class="flip-label">Reality</span>
+              <strong>AI is built by people.</strong>
+              <span>It learns from examples and rules, so it can help but it can also be wrong.</span>
+            </span>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section class="section room room-yellow shell reveal" id="pattern-lab">
+      <div class="section-heading">
+        <p class="eyebrow">Room 2</p>
+        <h2>How AI learns from patterns</h2>
+        <p>People feed AI many examples. The AI looks for clues that show up again and again.</p>
+      </div>
+      <div class="pattern-grid">
+        <article class="card">
+          <h3>Training, in kid words</h3>
+          <p>Imagine showing a robot helper lots of snack pictures labeled “fruit” or “not fruit.” After enough examples, it starts guessing based on patterns like color, shape, and seeds.</p>
+          <p>Good examples matter. If the examples are messy or unfair, the AI can learn the wrong pattern.</p>
+        </article>
+        <article class="card pattern-demo" aria-labelledby="patternDemoTitle">
+          <h3 id="patternDemoTitle">Pattern Picker</h3>
+          <p>Choose the clue you think the AI should use to spot fruit best.</p>
+          <div class="choice-row" id="patternChoices">
+            <button class="choice-chip" data-pattern="color">Color only</button>
+            <button class="choice-chip" data-pattern="seeds">Has seeds</button>
+            <button class="choice-chip" data-pattern="shape">Round shape</button>
+          </div>
+          <div class="pattern-result" id="patternResult" aria-live="polite">
+            Pick a clue to see what the AI learns.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section room room-pink shell reveal" id="everyday-ai">
+      <div class="section-heading">
+        <p class="eyebrow">Room 3</p>
+        <h2>Where kids see AI every day</h2>
+        <p>Tap around the lab scene to discover places where AI shows up in everyday life.</p>
+      </div>
+      <div class="scene-wrap">
+        <div class="scene card" role="group" aria-label="Interactive everyday AI scene">
+          <div class="scene-backdrop"></div>
+          <button class="hotspot hotspot-tv" data-hotspot="recommendations" aria-describedby="hotspotPanel">TV Picks</button>
+          <button class="hotspot hotspot-pencil" data-hotspot="spellcheck" aria-describedby="hotspotPanel">Spellcheck</button>
+          <button class="hotspot hotspot-mic" data-hotspot="voice" aria-describedby="hotspotPanel">Voice Helper</button>
+          <button class="hotspot hotspot-globe" data-hotspot="translation" aria-describedby="hotspotPanel">Translation</button>
+          <button class="hotspot hotspot-camera" data-hotspot="filters" aria-describedby="hotspotPanel">Photo Filters</button>
+          <button class="hotspot hotspot-book" data-hotspot="school" aria-describedby="hotspotPanel">School Tools</button>
+        </div>
+        <aside class="card hotspot-panel" id="hotspotPanel" tabindex="-1" aria-live="polite">
+          <h3 id="hotspotTitle">Tap a hotspot</h3>
+          <p id="hotspotText">You might already use AI when a video app recommends a show, when a tablet fixes spelling, or when a tool translates words.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section room room-mint shell reveal" id="sort-game">
+      <div class="section-heading">
+        <p class="eyebrow">Room 4</p>
+        <h2>What AI is good at vs what still needs humans</h2>
+        <p>AI is fast with patterns and repeated jobs. Humans are better at feelings, fairness, big choices, and understanding the full story.</p>
+      </div>
+      <div class="compare-grid">
+        <article class="card compare-card">
+          <h3>Great for AI</h3>
+          <ul>
+            <li>Finding repeated patterns</li>
+            <li>Sorting lots of information quickly</li>
+            <li>Suggesting first drafts or ideas</li>
+          </ul>
+        </article>
+        <article class="card compare-card">
+          <h3>Needs a Human</h3>
+          <ul>
+            <li>Making fair choices</li>
+            <li>Understanding feelings and context</li>
+            <li>Checking important answers</li>
+          </ul>
+        </article>
+      </div>
+      <div class="card sorter" aria-labelledby="sortTitle">
+        <h3 id="sortTitle">Sort the Task</h3>
+        <p id="sortPrompt">Decide whether this task belongs more in the AI bucket or the human bucket.</p>
+        <div class="sort-task" id="sortTask" tabindex="0">Loading task...</div>
+        <div class="sort-buttons">
+          <button class="button button-primary" id="aiBucket">Great for AI</button>
+          <button class="button button-secondary" id="humanBucket">Needs a Human</button>
+        </div>
+        <p class="sort-feedback" id="sortFeedback" aria-live="polite"></p>
+        <p class="sort-score" id="sortScore">Score: 0 / 0</p>
+      </div>
+    </section>
+
+    <section class="section room room-orange shell reveal" id="mistakes">
+      <div class="section-heading">
+        <p class="eyebrow">Room 5</p>
+        <h2>Can AI make mistakes?</h2>
+        <p>Yes. AI can guess wrong, leave out important facts, or repeat unfair patterns from its training examples.</p>
+      </div>
+      <div class="two-column">
+        <article class="card">
+          <h3>Concrete example</h3>
+          <p>An AI helper might say, “All whales are fish,” because it mixed up sea animals. That answer sounds confident, but it is wrong. Whales are mammals.</p>
+          <p>Sometimes AI also gives made-up facts when it does not know the answer. That is why smart users stay curious and check important information.</p>
+        </article>
+        <article class="card checklist-card">
+          <h3>Human Check Station</h3>
+          <ol>
+            <li>Pause and ask, “Does this make sense?”</li>
+            <li>Check a trusted book, teacher, parent, or school source.</li>
+            <li>Fix the answer if the AI got it wrong.</li>
+          </ol>
+          <div class="check-example">
+            <p><strong>AI answer:</strong> “Whales are fish.”</p>
+            <p><strong>Human check:</strong> “A science book says whales breathe air and feed milk to babies, so they are mammals.”</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section room room-purple shell reveal" id="safety">
+      <div class="section-heading">
+        <p class="eyebrow">Room 6</p>
+        <h2>Safety rules for kids</h2>
+        <p>AI can be useful, but using it safely is just as important as using it cleverly.</p>
+      </div>
+      <div class="safety-grid">
+        <article class="card golden-rules">
+          <h3>Golden Rules</h3>
+          <ul>
+            <li>Do not share your full name, address, phone number, school, or passwords.</li>
+            <li>Ask a trusted adult if a question feels tricky, private, or confusing.</li>
+            <li>Double-check important answers with a human.</li>
+            <li>Use AI to help you think, not to do all your thinking for you.</li>
+          </ul>
+        </article>
+        <article class="card safety-signs">
+          <h3>Remember with Byte</h3>
+          <div class="rule-badges">
+            <button class="rule-badge" data-rule="private">Keep personal info private</button>
+            <button class="rule-badge" data-rule="adult">Ask an adult when unsure</button>
+            <button class="rule-badge" data-rule="check">Check big answers with humans</button>
+          </div>
+          <p id="ruleMessage" aria-live="polite">Tap a rule badge to lock it in.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section room room-teal shell reveal" id="prompt-lab">
+      <div class="section-heading">
+        <p class="eyebrow">Room 7</p>
+        <h2>Prompt Lab</h2>
+        <p>A stronger prompt gives the AI more clues. Try adding ingredients to improve the result.</p>
+      </div>
+      <div class="prompt-layout">
+        <article class="card prompt-controls">
+          <h3>Choose prompt ingredients</h3>
+          <div class="toggle-list" id="promptOptions">
+            <label><input type="checkbox" value="goal"> Clear goal</label>
+            <label><input type="checkbox" value="audience"> Audience</label>
+            <label><input type="checkbox" value="details"> Important details</label>
+            <label><input type="checkbox" value="format"> Format</label>
+            <label><input type="checkbox" value="tone"> Tone</label>
+          </div>
+          <button class="button button-primary" id="buildPrompt">Build Better Prompt</button>
+        </article>
+        <article class="card prompt-output">
+          <div class="prompt-box">
+            <h3>Weak Prompt</h3>
+            <p id="weakPromptText">Tell me about frogs.</p>
+          </div>
+          <div class="prompt-box prompt-box-strong">
+            <h3>Better Prompt</h3>
+            <p id="strongPromptText">Pick ingredients to build a better prompt.</p>
+          </div>
+          <div class="prompt-box">
+            <h3>Why it helps</h3>
+            <p id="promptTip">Specific prompts often lead to clearer answers.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section room room-rainbow shell reveal" id="quiz">
+      <div class="section-heading">
+        <p class="eyebrow">Final Room</p>
+        <h2>Quiz + badge</h2>
+        <p>Answer five questions, see your score, and earn a shiny digital badge.</p>
+      </div>
+      <div class="quiz-grid">
+        <article class="card quiz-card">
+          <p class="quiz-progress" id="quizProgress">Question 1 of 5</p>
+          <h3 id="quizQuestion">Loading question...</h3>
+          <form id="quizForm">
+            <div id="quizOptions" class="quiz-options"></div>
+            <button class="button button-primary" type="submit" id="quizSubmit">Check Answer</button>
+          </form>
+          <div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>
+          <button class="button button-secondary hidden" id="nextQuestion">Next Question</button>
+        </article>
+        <aside class="card badge-card">
+          <h3>Your badge meter</h3>
+          <p id="badgeStatus">Answer the quiz to unlock your badge.</p>
+          <div class="badge-spot" id="badgeSpot" aria-live="polite">
+            <span class="badge-icon">?</span>
+          </div>
+          <div class="confetti" id="confetti" aria-hidden="true"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <h2>For parents and teachers</h2>
+        <p>Kids do best with AI when adults talk with them about curiosity, checking facts, fairness, and privacy. Try asking, “How do we know this answer is true?” and “What should stay private?”</p>
+      </div>
+      <div>
+        <p class="footer-note">Meet AI! encourages children to ask questions, think critically, and use AI as a tool with human guidance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
