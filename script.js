@@ -10,19 +10,19 @@
 const hotspotContent = {
   recommendations: {
     title: "Recommendations",
-    text: "Video and music apps may use AI to suggest what you might like next by spotting patterns in what lots of people choose."
+    text: "Video and music apps may use AI to suggest what you might like next by noticing patterns in what people watch or hear."
   },
   spellcheck: {
     title: "Spellcheck",
-    text: "Writing tools can use AI to notice likely spelling mistakes and suggest words that fit the sentence."
+    text: "Writing tools can use AI to spot likely spelling mistakes and suggest words that fit your sentence."
   },
   voice: {
     title: "Voice Assistants",
-    text: "A voice helper uses pattern matching to turn spoken words into text and figure out what you asked."
+    text: "A voice helper uses patterns to turn spoken words into text and guess what you asked."
   },
   translation: {
     title: "Translation",
-    text: "Translation tools compare language patterns to change words from one language into another."
+    text: "Translation tools compare language patterns to turn words from one language into another."
   },
   filters: {
     title: "Photo Filters",
@@ -30,20 +30,20 @@ const hotspotContent = {
   },
   school: {
     title: "School Tools",
-    text: "Some school tools use AI to read text aloud, help summarize, or suggest ways to study. A grown-up should still help check important work."
+    text: "Some school tools use AI to read text aloud, help summarize, or suggest study ideas. A grown-up should still help check important work."
   }
 };
 
 const patternExplanations = {
-  color: "Color can help a little, but it is weak by itself. A red toy and a red apple are both red, but only one is fruit.",
-  seeds: "Nice pick. Seeds are a stronger clue because many fruits have them, so the AI gets a more useful pattern.",
+  color: "Color helps a little, but it is weak by itself. A red toy and a red apple are both red, but only one is fruit.",
+  seeds: "Nice pick. Seeds are a stronger clue because many fruits have them, so the AI learns a better pattern.",
   shape: "Shape can help sometimes, but many round things are not fruit. A ball is round too."
 };
 
 const safetyMessages = {
   private: "Smart move. Personal details should stay private unless a trusted adult says it is okay to share them.",
   adult: "Yes. Adults can help when something feels confusing, private, or too big to handle alone.",
-  check: "Exactly. Important answers about health, school, money, or people should be checked by a human."
+  check: "Exactly. Big answers about health, school, money, or people should be checked by a human."
 };
 
 const sortTasks = [
@@ -70,7 +70,7 @@ const sortTasks = [
   {
     text: "Writing a first list of science project title ideas",
     bucket: "ai",
-    explanation: "AI can be useful for brainstorming a first draft of ideas."
+    explanation: "AI can be useful for brainstorming a first batch of ideas."
   }
 ];
 
@@ -149,7 +149,8 @@ const state = {
   sortScore: 0,
   sortAnswered: 0,
   quizIndex: 0,
-  quizScore: 0
+  quizScore: 0,
+  activeHotspot: null
 };
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -170,6 +171,33 @@ function setupNav() {
       navToggle.setAttribute("aria-expanded", "false");
     });
   });
+
+  setupActiveNav(links);
+}
+
+function setupActiveNav(links) {
+  const sections = Array.from(links)
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  const setActiveLink = () => {
+    let currentId = sections[0]?.id;
+
+    sections.forEach((section) => {
+      const top = section.getBoundingClientRect().top;
+      if (top <= 160) currentId = section.id;
+    });
+
+    links.forEach((link) => {
+      const isActive = link.getAttribute("href") === `#${currentId}`;
+      link.classList.toggle("active", isActive);
+      if (isActive) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  setActiveLink();
+  window.addEventListener("scroll", setActiveLink, { passive: true });
 }
 
 function setupProgressBar() {
@@ -233,11 +261,16 @@ function setupHotspots() {
   hotspotButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const content = hotspotContent[button.dataset.hotspot];
+      hotspotButtons.forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+      state.activeHotspot = button.dataset.hotspot;
       hotspotTitle.textContent = content.title;
       hotspotText.textContent = content.text;
       hotspotPanel.focus();
     });
   });
+
+  if (hotspotButtons[0]) hotspotButtons[0].click();
 }
 
 function renderSortTask() {
@@ -267,6 +300,15 @@ function handleSortGuess(bucket) {
   feedback.textContent = `${correct ? "Nice sort!" : "Good try."} ${current.explanation}`;
   feedback.className = `sort-feedback ${correct ? "correct" : "incorrect"}`;
   state.sortIndex += 1;
+  if (feedback.animate) {
+    feedback.animate(
+      [
+        { opacity: 0.55, transform: "translateY(8px)" },
+        { opacity: 1, transform: "translateY(0)" }
+      ],
+      { duration: prefersReducedMotion ? 1 : 260, easing: "ease-out" }
+    );
+  }
   renderSortTask();
 }
 
@@ -296,7 +338,7 @@ function buildPromptText() {
 
   if (checkedValues.length === 0) {
     strongPrompt.textContent = "Tell me about frogs.";
-    promptTip.textContent = "This is still pretty broad, so the answer may be vague.";
+    promptTip.textContent = "This is still broad, so the answer may be fuzzy.";
     return;
   }
 
@@ -313,11 +355,11 @@ function buildPromptText() {
   strongPrompt.textContent = `${parts.join(" ")}.`;
 
   if (checkedValues.length <= 2) {
-    promptTip.textContent = "Better. A few clues help the AI aim in the right direction.";
+    promptTip.textContent = "Better. A few clues help the AI head in the right direction.";
   } else if (checkedValues.length <= 4) {
     promptTip.textContent = "Nice. The prompt is clearer, more detailed, and easier to answer well.";
   } else {
-    promptTip.textContent = "Excellent. The AI now knows the topic, audience, details, format, and tone.";
+    promptTip.textContent = "Excellent. Now the AI knows the topic, audience, details, format, and tone.";
   }
 }
 
@@ -346,6 +388,9 @@ function renderQuizQuestion() {
       <span>${option}</span>
     </label>
   `).join("");
+
+  const quizSubmit = document.getElementById("quizSubmit");
+  quizSubmit.textContent = "Check My Answer";
 }
 
 function showBadge() {
@@ -411,6 +456,7 @@ function setupQuiz() {
     });
     nextButton.classList.remove("hidden");
     document.getElementById("quizSubmit").disabled = true;
+    nextButton.focus();
   });
 
   nextButton.addEventListener("click", () => {
